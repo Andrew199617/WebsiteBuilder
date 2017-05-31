@@ -1,41 +1,71 @@
 package neumont.csc280.WebsiteBuilder.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class DoLogin
- */
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import neumont.csc280.WebsiteBuilder.entities.User;
+
+
 @WebServlet("/DoLogin")
 public class DoLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public DoLogin() {
         super();
-        // TODO Auto-generated constructor stub
+     
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		//JDBCEngine jdbc = Master.getJDBCEngine();
+		//User user = jdbc.findUser(username);
+		User user = null;
+		Session dbSession = Master.getSessionFactory().getCurrentSession();
+		Transaction transaction = dbSession.beginTransaction();
+		try {
+			String hql = "FROM users u WHERE u.username='" + username +"'";
+			Query<User> query = dbSession.createQuery(hql, User.class);
+			//List<User> results = query.list();
+//			if(results.size() > 0) {
+//				user = results.get(0);
+//				//user.setLastLoggedin(System.currentTimeMillis());
+//				dbSession.save(user);
+//			}
+			if(user == null || !user.getPassword().equals(password)) {
+				handleInvalidLogin(request, response);
+				return;
+			}
+			HttpSession session = request.getSession(true);
+			session.setAttribute("user", user);
+			request.getRequestDispatcher("main.html")
+				.forward(request, response);
+			transaction.commit();
+		}
+		catch(Exception ex) {
+			transaction.rollback();
+			throw new RuntimeException(ex);
+		}
+	}
+	
+	private void handleInvalidLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("error", "Invalid username or password");
+		request.getRequestDispatcher("index.jsp")
+			.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 	}
 
 }
