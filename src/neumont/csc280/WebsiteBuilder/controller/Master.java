@@ -25,26 +25,17 @@ public class Master implements ServletContextListener{
 	
 	@Override
 	public void contextInitialized(ServletContextEvent e) {
-		//try {
-			//jdbcEngine.connect();
-			StandardServiceRegistry standardRegistery =
-					new StandardServiceRegistryBuilder()
-						.configure("hibernate.cfg.xml").build();
-			Metadata metaData = new MetadataSources(standardRegistery).getMetadataBuilder().build();
-			sessionFactory = 
-				metaData.getSessionFactoryBuilder().build();
-			
-		//} catch (ClassNotFoundException | SQLException e1) {
-		//	e1.printStackTrace(System.err);
-		//}
+
+		StandardServiceRegistry standardRegistery =
+				new StandardServiceRegistryBuilder()
+					.configure("hibernate.cfg.xml").build();
+		Metadata metaData = new MetadataSources(standardRegistery).getMetadataBuilder().build();
+		sessionFactory = 
+			metaData.getSessionFactoryBuilder().build();
 	}
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		//try {
-			//jdbcEngine.disconnect();
-		//} catch (SQLException e) {
-		//	e.printStackTrace(System.err);
-		//}
+		
 	}
 }
