@@ -4,21 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity(name="users")
 public class User {
-private int userID;
+	private int userID;
 	
 	private String username;
 	
 	private String password;
-	
-	//private List<ShoppingList> shoppingLists = new ArrayList<>();
 
 	@Id
 	@Column(name="user_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getUserID() {
 		return userID;
 	}
@@ -44,14 +41,5 @@ private int userID;
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-//	@OneToMany(mappedBy="owner")
-//	public List<ShoppingList> getShoppingLists() {
-//		return shoppingLists;
-//	}
-//
-//	public void setShoppingLists(List<ShoppingList> shoppingLists) {
-//		this.shoppingLists = shoppingLists;
-//	}
 	
 }

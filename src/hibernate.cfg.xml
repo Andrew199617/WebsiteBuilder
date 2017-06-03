@@ -6,9 +6,9 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:5000/shopping_lists</property>
+		<property name="connection.url">jdbc:mysql://localhost:5000/websitebuilder</property>
 		<property name="connection.username">Andrew</property>
-		<property name="connection.password"></property>
+		<property name="connection.password">Yousuck7711</property>
 		<property name="connection.pool_size">10</property>
 		<property name="show_sql">true</property>
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -16,8 +16,6 @@
 		<property name="hibernate.id.new_generator_mappings">false</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 	
-		<mapping class="entities.User" />
-		<mapping class="entities.ShoppingList" />
-		<mapping class="entities.Item" />
+		<mapping class="neumont.csc280.WebsiteBuilder.entities.User" />
 	</session-factory>
 </hibernate-configuration>

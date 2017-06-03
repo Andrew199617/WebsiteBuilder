@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import neumont.csc280.WebsiteBuilder.entities.User;
-import neumont.csc280.WebsiteBuilder.model.HibernateEngine;
 
 
 @WebServlet("/CreateUser")
@@ -36,8 +35,6 @@ public class CreateUser extends HttpServlet {
 		user.setPassword(password);
 		user.setUserID(nextUserID++);
 		
-		HibernateEngine engine = Master.getHibernateEngine();
-		engine.createUser(user);
 		request.setAttribute("user", user);
 		request.getRequestDispatcher("createUserSuccess.html")
 			.forward(request, response);
