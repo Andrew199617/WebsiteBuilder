@@ -1,5 +1,8 @@
 package neumont.csc280.WebsiteBuilder.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -20,6 +24,8 @@ import neumont.csc280.WebsiteBuilder.entities.User;
 @WebServlet("/dologin")
 public class DoLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	public static String MyPath = "D:/Self Taught/Eclipse/WebsiteBuilder/WebContent";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
@@ -54,7 +60,24 @@ public class DoLogin extends HttpServlet {
 		
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(user.getUsername());
+
+		File welcomePage = new File(MyPath + "/WelcomePage.html");
+		
+		BufferedReader br = new BufferedReader(new FileReader(welcomePage));
+	    StringBuilder sb = new StringBuilder();
+		try {
+		    String line = br.readLine();
+		
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append("\n");
+		        line = br.readLine();
+		    }
+		} finally {
+		    br.close();
+		}
+		    
+		response.getWriter().write(user.getUsername() + "," + sb.toString());
 	}
 	
 	private void handleInvalidLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -10,12 +10,9 @@
 
 var loadHome = (event, responseText) => {
 	console.log('loading home')
-	let user = responseText.split(',')
-	console.log(user)
+	let username = responseText.split(',')[0]
 	$("#home").show();
-    $("#home").html('<h1>Welcome ' + user[0] + '</h1><br>' +	
-		'<a href="http://localhost:8080/WebsiteBuilder/createUser.html">View Lists</a>'); 
-    
+    $("#home").html(responseText); 
 		//<% User user = (User) session.getAttribute("user");
 		//String username = user.getUsername(); %>
 		//<h2> Welcome <%=username %></h2>
@@ -43,10 +40,35 @@ $(document).on("submit", "#loginForm", function(event) {
     event.preventDefault(); 
 });
 
+var LoadCreateWebsite = function(event) {
+    var $form = $('#loginForm');
+	console.log('Post Sending')
+    $.post($form.attr("action"),  $('#loginForm').serialize(), function(responseText) {
+		console.log('Post Success')
+    	if(responseText === "error"){
+			console.log('failed login')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Successful login')
+    		$("#login").hide();
+    		loadHome(event,responseText);
+    	}
+    });
+
+    event.preventDefault(); 
+});
+
 </script>
 <title>Welcome to the WebsiteBuilder</title>
 </head>
 <body>
+<div>
+
+	<div class="header"  style="background-color: black; padding: 12px;">
+		<a class="btn btn-primary btn active" href="createUser.html">Register a new user</a>
+	</div>
+
 	<div id="login" class="loginRegisterDiv">
 		<form id="loginForm" method="post" action="/WebsiteBuilder/dologin">
 			<h2>Login</h2>
@@ -70,6 +92,6 @@ $(document).on("submit", "#loginForm", function(event) {
 
 	<div id="home">
 	</div>
-
+</div>
 </body>
 </html>

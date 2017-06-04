@@ -1,5 +1,8 @@
 package neumont.csc280.WebsiteBuilder.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,18 +33,35 @@ public class CreateUser extends HttpServlet {
 		if(!password.equals(retypePassword)) {
 			throw new IllegalArgumentException("password and retype password do not match");
 		}
-		User user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-		user.setUserID(nextUserID++);
 		
-		request.setAttribute("user", user);
-		request.getRequestDispatcher("createUserSuccess.html")
-			.forward(request, response);
+		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+
+		File welcomePage = new File(DoLogin.MyPath + "/createUserSuccess.html");
+		
+		BufferedReader br = new BufferedReader(new FileReader(welcomePage));
+	    StringBuilder sb = new StringBuilder();
+		try {
+		    String line = br.readLine();
+		
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append("\n");
+		        line = br.readLine();
+		    }
+		} finally {
+		    br.close();
+		}
+		    
+		response.getWriter().write(sb.toString());
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+//		User user = new User();
+//		user.setUsername(username);
+//		user.setPassword(password);
+//		user.setUserID(nextUserID++);
 	}
 
 }
