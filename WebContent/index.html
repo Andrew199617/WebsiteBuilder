@@ -11,8 +11,9 @@
 var loadHome = (event, responseText) => {
 	console.log('loading home')
 	let username = responseText.split(',')[0]
+	let welcomePage = responseText.split(',')[1]
 	$("#home").show();
-    $("#home").html(responseText); 
+    $("#home").html(welcomePage); 
 		//<% User user = (User) session.getAttribute("user");
 		//String username = user.getUsername(); %>
 		//<h2> Welcome <%=username %></h2>

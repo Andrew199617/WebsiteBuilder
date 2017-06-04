@@ -76,8 +76,10 @@ public class DoLogin extends HttpServlet {
 		} finally {
 		    br.close();
 		}
-		    
-		response.getWriter().write(user.getUsername() + "," + sb.toString());
+
+	    response.setContentType("text/html");
+	    
+		response.getWriter().write(sb.toString());
 	}
 	
 	private void handleInvalidLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
