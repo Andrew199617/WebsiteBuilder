@@ -2,37 +2,96 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="style.css">
+<script type="text/javascript" >
+
+var loadHome = (event, responseText) => {
+	console.log('loading home')
+	let username = responseText.split(',')[0]
+	$("#home").show();
+    $("#home").html(responseText); 
+		//<% User user = (User) session.getAttribute("user");
+		//String username = user.getUsername(); %>
+		//<h2> Welcome <%=username %></h2>
+		//<br>	
+		//<a href="http://localhost:8080/ShoppingLists/Lists">View Lists</a>
+	event.preventDefault(); 
+}
+
+$(document).on("submit", "#loginForm", function(event) {
+    var $form = $('#loginForm');
+	console.log('Post Sending')
+    $.post($form.attr("action"),  $('#loginForm').serialize(), function(responseText) {
+		console.log('Post Success')
+    	if(responseText === "error"){
+			console.log('failed login')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Successful login')
+    		$("#login").hide();
+    		loadHome(event,responseText);
+    	}
+    });
+
+    event.preventDefault(); 
+});
+
+var LoadCreateWebsite = function(event) {
+    var $form = $('#loginForm');
+	console.log('Post Sending')
+    $.post($form.attr("action"),  $('#loginForm').serialize(), function(responseText) {
+		console.log('Post Success')
+    	if(responseText === "error"){
+			console.log('failed login')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Successful login')
+    		$("#login").hide();
+    		loadHome(event,responseText);
+    	}
+    });
+
+    event.preventDefault(); 
+});
+
+</script>
 <title>Welcome to the WebsiteBuilder</title>
 </head>
 <body>
-	<div class="loginRegisterDiv">
-	<form method="post" action="dologin">
-		<h2>Login</h2>
-		<div>
+<div>
+
+	<div class="header"  style="background-color: black; padding: 12px;">
+		<a class="btn btn-primary btn active" href="createUser.html">Register a new user</a>
+	</div>
+
+	<div id="login" class="loginRegisterDiv">
+		<form id="loginForm" method="post" action="/WebsiteBuilder/dologin">
+			<h2>Login</h2>
 			<label>Username:</label>
 			<input type="text" class="form-control" name="username" />
-		</div>
-		<br>
-		<div>
+			<br>
 			<label>Password:</label>
 			<input type="password" class="form-control" name="password" />
-		</div>
-		<br>
-		<div>
-			<input class="btn btn-default" type="submit" value="Login" />
+			<h3 style="color:red;" id="error"></h3>
 			<br>
-		</div>
-		<br>
+			<input class="btn btn-default" type="submit" name="submit" value="Login" />
+			<br>
+			<br>
+		</form>
+		
 		<div>
-			<a class="btn btn-primary btn active" href="createUser.html">Register a new user</a>
+		<a class="btn btn-primary btn active" href="createUser.html">Register a new user</a>
 		</div>
-	</form>
 	</div>
-	<br>
-	<br>
 
+
+	<div id="home">
+	</div>
+</div>
 </body>
 </html>
