@@ -1,6 +1,7 @@
 package neumont.csc280.WebsiteBuilder.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ import org.hibernate.query.Query;
 import neumont.csc280.WebsiteBuilder.entities.User;
 
 
-@WebServlet("/DoLogin")
+@WebServlet("/dologin")
 public class DoLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,20 +37,19 @@ public class DoLogin extends HttpServlet {
 		try {
 			String hql = "FROM users u WHERE u.username='" + username +"'";
 			Query<User> query = dbSession.createQuery(hql, User.class);
-			//List<User> results = query.list();
-//			if(results.size() > 0) {
-//				user = results.get(0);
-//				//user.setLastLoggedin(System.currentTimeMillis());
-//				dbSession.save(user);
-//			}
+			List<User> results = query.list();
+			if(results.size() > 0) {
+				user = results.get(0);
+//				user.setLastLoggedin(System.currentTimeMillis());
+				dbSession.save(user);
+			}
 			if(user == null || !user.getPassword().equals(password)) {
 				handleInvalidLogin(request, response);
 				return;
 			}
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", user);
-			request.getRequestDispatcher("main.html")
-				.forward(request, response);
+			request.getRequestDispatcher("main.html").include(request, response);
 			transaction.commit();
 		}
 		catch(Exception ex) {
