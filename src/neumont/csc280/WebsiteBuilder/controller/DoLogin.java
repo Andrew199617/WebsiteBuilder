@@ -58,8 +58,6 @@ public class DoLogin extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", user);
 		
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
 
 		File welcomePage = new File(MyPath + "/WelcomePage.html");
 		
@@ -77,8 +75,8 @@ public class DoLogin extends HttpServlet {
 		    br.close();
 		}
 
+		response.setCharacterEncoding("UTF-8");
 	    response.setContentType("text/html");
-	    
 		response.getWriter().write(sb.toString());
 	}
 	
