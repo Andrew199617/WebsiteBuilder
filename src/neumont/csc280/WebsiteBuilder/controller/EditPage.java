@@ -20,16 +20,29 @@ import neumont.csc280.WebsiteBuilder.entities.User;
 @WebServlet("/EditPage")
 public class EditPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String missionStatement;
+	String history;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String missionStatement = request.getParameter("missionStatement");
-		String history = request.getParameter("history");
+		missionStatement = request.getParameter("missionStatement");
+		history = request.getParameter("history");
 		
+		if(missionStatement != "" || missionStatement != null || 
+				history != "" || history != null)
+		{
+			AddAboutUs(request,response);
+		}
 		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write("error");
+	}
+
+	private void AddAboutUs(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession(true);
 		User user = (User)session.getAttribute("user");
 		
