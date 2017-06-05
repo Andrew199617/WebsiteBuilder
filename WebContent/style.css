@@ -23,3 +23,35 @@
 	position: relative;
 	top: 0;
 }
+
+#individualTemplate {
+    display: inline-block;
+	border: 1px solid black;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #888888;
+	background-color: #9A0CE8;
+	color: white;
+	padding: 20px;
+	border-color: white;
+	text-align: center;
+    margin: 5px;
+    width: 350px;
+    max-height: 150px;
+}
+
+a {
+	color: white;
+}
+
+#firstTemplatedWebsite {
+	margin: 40px;
+	border: 5px solid black;
+}
+
+.jumbotron {
+	text-align: center;
+}
+
+#firstTemplateAddress {
+	text-align: center;
+}
