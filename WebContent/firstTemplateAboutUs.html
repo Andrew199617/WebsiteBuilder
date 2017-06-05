@@ -5,7 +5,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./styles/style.css">
+<script type="text/javascript" >
+
+$(document).on("submit", "#EditPage", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#EditPage').attr("action"),  $('#EditPage').serialize(), function(responseText) {
+		console.log('Post Sent')
+    	if(responseText === "error"){
+			console.log('error')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Success')
+    		let missionStatement = responseText.split(',')[0]
+			$('#missionStatement').html(missionStatement)
+    		let history = responseText.split(',')[1]
+			$('#history').html(history)
+    	}
+    });
+
+	event.preventDefault()
+});
+
+</script>
 <title>First Template</title>
 </head>
 <body>
@@ -15,23 +39,34 @@
 	<h1>This is the first template about us page</h1>
 	
 	<div id="firstTemplatedWebsite">
-	<div class="header"  style="background-color: black; padding: 12px;">
-		<a class="btn btn-primary btn active" href="firstTemplate.html">Home</a>
-		<a class="btn btn-primary btn active" href="firstTemplateAboutUs.html">About Us</a>
-		<a class="btn btn-primary btn active" href="firstTemplateContact.html">Contact</a>
-		
+
+		</div>
+
+		<div class="container">
+		<br>
+		  <div class="container" id="firstTemplateAddress">
+		  	<h2>Mission Statement</h2>
+		  	<h3 id="missionStatement">User can add their companies mission statement here</h3>
+		  	<h2>History</h2>
+		  	<h3 id="history">User can add text here to speak to the history of their company</h3>
+		  
+		  </div>
+		</div>
 	</div>
-	
-	<div class="container">
-	<br>
-	  <div class="container" id="firstTemplateAddress">
-	  	<h2>Mission Statement</h2>
-	  	<h3>User can add their companies mission statement here</h3>
-	  	<h2>Company History</h2>
-	  	<h3>User can add text here to speak to the history of their company</h3>
-	  	
-	  </div>
-	</div>
+
+	<div class="loginRegisterDiv">
+		<form id="EditPage" method="post" action="/WebsiteBuilder/EditPage">
+			<h2>Edit About Me</h2>
+			<label>Mission Statement:</label>
+			<textarea class="form-control" name="missionStatement"></textarea>
+			<br>
+			<label>History:</label>
+			<textarea class="form-control" name="history"></textarea>
+			<h3 style="color:red;" id="errosr"></h3>
+			<br>
+			<input class="btn btn-default" type="submit" name="submit" value="Finish Page" />
+			<br>
+		</form>
 	</div>
 
 </body>
