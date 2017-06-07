@@ -25,7 +25,7 @@ import neumont.csc280.WebsiteBuilder.entities.User;
 public class DoLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public static String MyPath = "C:/Users/Daniel Kuhrmeyer/Desktop/WBGroup/WebsiteBuilder/WebContent";
+	public static String MyPath = "D:/Self Taught/Eclipse/WebsiteBuilder/WebContent";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");

@@ -8,25 +8,29 @@
 <link rel="stylesheet" href="./styles/style.css">
 <script type="text/javascript" >
 
-$(document).on("load", function(event) {
+$(document).ready(function(event) {
     
 	console.log('Loading!')
-    $.post($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
+	console.log(event)
+    $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
 		console.log('Post Sent')
     	if(responseText === "error"){
 			console.log('error')
 			$('#error').text('Invalid Username or Password');
 		}
     	else {
-			console.log('Success')
     		let firstTemplateTitle = responseText.split(',')[0]
-			$('#firstTemplateTitle').html(firstTemplateTitle)
     		let firstTemplateDescription = responseText.split(',')[1]
-			$('#firstTemplateDescription').html(firstTemplateDescription)
+
+			if(firstTemplateTitle !== null) {
+				$('#firstTemplateTitle').html(firstTemplateTitle)
+			}
+			if(firstTemplateDescription !== null) {
+				$('#firstTemplateDescription').html(firstTemplateDescription)
+			}
     	}
     });
 
-	event.preventDefault()
 });
 
 $(document).on("submit", "#EditPage", function(event) {
