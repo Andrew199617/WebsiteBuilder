@@ -45,9 +45,18 @@ public class EditPage extends HttpServlet {
 
 		switch(dataNeeded){
 		case "title/description":
-			response.setContentType("text/plain");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(CreatePage.page.getTitle() + ","  + CreatePage.page.getDescription());
+			if(CreatePage.page.getTitle() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getTitle() + ","  + CreatePage.page.getDescription());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
 			break;
 		}
 	}

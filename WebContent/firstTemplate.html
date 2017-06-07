@@ -16,18 +16,14 @@ $(document).ready(function(event) {
 		console.log('Post Sent')
     	if(responseText === "error"){
 			console.log('error')
-			$('#error').text('Invalid Username or Password');
 		}
     	else {
     		let firstTemplateTitle = responseText.split(',')[0]
     		let firstTemplateDescription = responseText.split(',')[1]
 
-			if(firstTemplateTitle !== null) {
-				$('#firstTemplateTitle').html(firstTemplateTitle)
-			}
-			if(firstTemplateDescription !== null) {
-				$('#firstTemplateDescription').html(firstTemplateDescription)
-			}
+			$('#firstTemplateTitle').html(firstTemplateTitle)
+			$('#firstTemplateDescription').html(firstTemplateDescription)
+			
     	}
     });
 
