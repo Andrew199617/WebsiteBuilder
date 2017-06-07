@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./styles/style.css">
+<script type="text/javascript" >
+
+$(document).on("submit", "#EditPage", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#EditPage').attr("action"),  $('#EditPage').serialize(), function(responseText) {
+		console.log('Post Sent')
+    	if(responseText === "error"){
+			console.log('error')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Success')
+			$('#error').text('Success')
+    	}
+    });
+});
+
+</script>
+<title>Create Page</title>
+</head>
+<body>
+
+	<div class="header"  style="background-color: black; padding: 12px;">
+		<a class="btn btn-primary btn active" href="WelcomePage.html">Home</a>
+	</div>
+    
+	<div class="loginRegisterDiv">
+		<form id="EditPage" method="post" action="/WebsiteBuilder/CreatePage">
+			<h2>Website information</h2>
+			<label>Website Name:</label>
+			<textarea class="form-control" name="websiteName"></textarea>
+			<h3 style="color:red;" id="error"></h3>
+			<br>
+			<input class="btn btn-default" type="submit" name="submit" value="Create Page" />
+			<br>
+		</form>
+	</div>
+	
+</body>
+</html>

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -43,9 +44,9 @@ public class CreateUser extends HttpServlet {
 
 		Session dbSession = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = dbSession.beginTransaction();
+		User user = new User();
 		try {
 
-			User user = new User();
 			user.setUsername(username);
 			user.setPassword(password);
 			dbSession.save(user);
@@ -73,6 +74,8 @@ public class CreateUser extends HttpServlet {
 		    br.close();
 		}
 
+		HttpSession session = request.getSession(true);
+		session.setAttribute("user", user);
 	    response.setContentType("text/html");
 		response.getWriter().write(sb.toString());
 	}

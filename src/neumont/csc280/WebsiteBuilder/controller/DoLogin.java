@@ -59,7 +59,7 @@ public class DoLogin extends HttpServlet {
 		session.setAttribute("user", user);
 		
 
-		File welcomePage = new File(MyPath + "/WelcomePage.html");
+		File welcomePage = new File(MyPath + "/createPage.html");
 		
 		BufferedReader br = new BufferedReader(new FileReader(welcomePage));
 	    StringBuilder sb = new StringBuilder();

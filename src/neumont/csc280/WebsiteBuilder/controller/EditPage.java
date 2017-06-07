@@ -1,6 +1,8 @@
 package neumont.csc280.WebsiteBuilder.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import neumont.csc280.WebsiteBuilder.entities.Page;
 import neumont.csc280.WebsiteBuilder.entities.User;
@@ -19,6 +22,7 @@ public class EditPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String missionStatement;
 	String history;
+	
 	String title;
 	String description;
 	String address;
@@ -33,16 +37,27 @@ public class EditPage extends HttpServlet {
 	String profileName;
 	String email;
 	String bio;
-	Page page = null;
-	boolean pageCreated = false;
+	
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String dataNeeded = request.getParameter("dataNeeded");
+		HttpSession session = request.getSession(true);
+		User user = (User)session.getAttribute("user");
+
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(firstTemplateTitle + ","  + firstTemplateDescription);
+		switch(dataNeeded){
+		case "title/description":
+			break;
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		missionStatement = request.getParameter("missionStatement");
 		history = request.getParameter("history");
+		
 		title = request.getParameter("title");
 		description = request.getParameter("description");
 		address = request.getParameter("address");
@@ -53,13 +68,16 @@ public class EditPage extends HttpServlet {
 		bio = request.getParameter("bio");
 		email = request.getParameter("email");
 		
+		
 		if(missionStatement != null && history != null)
 		{
 			AddAboutUs(request,response);
 			return;
+		
 		}else if(title != null && description != null){
 			AddFirstTemplateTitle(request, response);
 			return;
+		
 		}else if(address != null){
 			AddAddress(request, response);
 			return;
@@ -86,28 +104,19 @@ public class EditPage extends HttpServlet {
 	}
 
 	private void AddAboutUs(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
+		
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
+		
 		try {
-			page.setHistory(history);
-			page.setMissionStatement(missionStatement);
 			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
+			CreatePage.page.setHistory(history);
+			CreatePage.page.setMissionStatement(missionStatement);
 			
 			
+			dbSession.update(CreatePage.page);
+
 			transaction.commit();
 		}
 		catch(Exception e)
@@ -122,26 +131,18 @@ public class EditPage extends HttpServlet {
 	}
 	
 	private void AddFirstTemplateTitle(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
+		
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
+		
 		try {
-			page.setTitle(title);
-			page.setDescription(description);
 			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
+			CreatePage.page.setTitle(firstTemplateTitle);
+			CreatePage.page.setDescription(firstTemplateDescription);
+
+			dbSession.update(CreatePage.page);
+			
 			
 			transaction.commit();
 		}
