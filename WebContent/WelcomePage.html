@@ -61,29 +61,34 @@ $(document).on('submit', "#LoadData3", function(event) {
 	</div>
 
 	<div id="home">
-	    <div> 
-            Template Screen
+		<div id="templateDiv">
+	    <h2>Choose A Template</h2>
         </div>
-        
+        <br>
+        <img src="./styles/firstTemplateImage.PNG" width="40%" height="20%">
 		<div class="individualTemplate">
 			<form id="LoadData1" method="get" action="/WebsiteBuilder/CreatePage">
 				<input class="form-control" name="templateNum" value="1"/>
 				<br>
-        		<input type='submit' name="submit" value="Template 1" />
+        		<input id="templateOneButton" type='submit' name="submit" value="Template 1" />
+        		<br>
 			</form>
 		</div>
+		<br>
 		<div class="individualTemplate">
 			<form id="LoadData2" method="get" action="/WebsiteBuilder/CreatePage">
 				<input class="form-control" name="templateNum" value="2"/>
 				<br>
-        		<input type='submit' name="submit" value="Template 2" />
+        		<input id="templateOneButton" type='submit' name="submit" value="Template 2" />
+        		<br>
 			</form>
 		</div>
+		<br>
 		<div class="individualTemplate">
 			<form id="LoadData3" method="get" action="/WebsiteBuilder/CreatePage">
 				<input class="form-control" name="templateNum" value="3"/>
 				<br>
-        		<input type='submit' name="submit" value="Template 3" />
+        		<input id="templateOneButton" type='submit' name="submit" value="Template 3" />
 			</form>
 		</div>
 
