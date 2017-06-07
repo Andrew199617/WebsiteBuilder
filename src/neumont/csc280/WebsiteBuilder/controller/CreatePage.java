@@ -35,12 +35,15 @@ public class CreatePage extends HttpServlet {
 		
 		String templateNum = request.getParameter("templateNum");
 		
+		
+		
 		HttpSession session = request.getSession(true);
 		User user = (User)session.getAttribute("user");
+		Session dbSession = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = dbSession.beginTransaction();
+		
 		if(page == null) {
 			page = new Page();
-			Session dbSession = HibernateUtil.getSessionFactory().getCurrentSession();
-			Transaction transaction = dbSession.beginTransaction();
 			try {
 			
 				page.setName(pageName);
@@ -54,8 +57,22 @@ public class CreatePage extends HttpServlet {
 				transaction.rollback();
 				ex.printStackTrace();
 			}
-			session.setAttribute("page", page);
 		
+		} else if(templateNum != null)
+		{
+			try {
+				
+				page.setName(pageName);
+				page.setOwner(user);
+				
+				dbSession.save(page);
+				
+				transaction.commit();
+			}
+			catch(Exception ex) {
+				transaction.rollback();
+				ex.printStackTrace();
+			}
 		}
 		
 		

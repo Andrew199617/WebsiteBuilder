@@ -28,6 +28,27 @@ var LoadCreateWebsite = function(event) {
     event.preventDefault(); 
 });
 
+$(document).on('submit', "#LoadData1", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#LoadData1').attr("action"),  $('#LoadData1').serialize());
+
+});
+
+$(document).on('submit', "#LoadData2", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#LoadData2').attr("action"),  $('#LoadData2').serialize());
+
+});
+
+$(document).on('submit', "#LoadData3", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#LoadData3').attr("action"),  $('#LoadData3').serialize());
+
+});
+
 </script>
 <title>Welcome to the WebsiteBuilder</title>
 </head>
@@ -44,15 +65,27 @@ var LoadCreateWebsite = function(event) {
             Template Screen
         </div>
         
-        <div id="individualTemplate">
-        	<a href="firstTemplate.html">Template 1</a>
-        </div>
-        <div id="individualTemplate">
-        	<a href="secondTemplate.html">Template 2</a>
-        </div>
-        <div id="individualTemplate">
-        	<a href="thirdTemplate.html">Template 3</a>
-        </div>
+		<div class="individualTemplate">
+			<form id="LoadData1" method="get" action="/WebsiteBuilder/CreatePage">
+				<input class="form-control" name="templateNum" value="1"/>
+				<br>
+        		<input type='submit' name="submit" value="Template 1" />
+			</form>
+		</div>
+		<div class="individualTemplate">
+			<form id="LoadData2" method="get" action="/WebsiteBuilder/CreatePage">
+				<input class="form-control" name="templateNum" value="2"/>
+				<br>
+        		<input type='submit' name="submit" value="Template 2" />
+			</form>
+		</div>
+		<div class="individualTemplate">
+			<form id="LoadData3" method="get" action="/WebsiteBuilder/CreatePage">
+				<input class="form-control" name="templateNum" value="3"/>
+				<br>
+        		<input type='submit' name="submit" value="Template 3" />
+			</form>
+		</div>
 
 	</div>
 </div>
