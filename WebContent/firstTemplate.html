@@ -20,11 +20,14 @@ $(document).ready(function(event) {
 		}
     	else {
     		let firstTemplateTitle = responseText.split(',')[0]
-			$('#firstTemplateTitle').html(firstTemplateTitle)
     		let firstTemplateDescription = responseText.split(',')[1]
-			$('#firstTemplateDescription').html(firstTemplateDescription)
-			console.log(firstTemplateTitle)
-			console.log(firstTemplateDescription)
+
+			if(firstTemplateTitle !== null) {
+				$('#firstTemplateTitle').html(firstTemplateTitle)
+			}
+			if(firstTemplateDescription !== null) {
+				$('#firstTemplateDescription').html(firstTemplateDescription)
+			}
     	}
     });
 
