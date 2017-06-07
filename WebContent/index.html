@@ -13,11 +13,6 @@ var loadHome = (event, responseText) => {
 	let username = responseText.split(',')[0]
 	$("#home").show();
     $("#home").html(responseText); 
-		//<% User user = (User) session.getAttribute("user");
-		//String username = user.getUsername(); %>
-		//<h2> Welcome <%=username %></h2>
-		//<br>	
-		//<a href="http://localhost:8080/ShoppingLists/Lists">View Lists</a>
 	event.preventDefault(); 
 }
 
