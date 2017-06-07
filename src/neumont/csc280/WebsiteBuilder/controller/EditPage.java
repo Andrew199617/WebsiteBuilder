@@ -60,24 +60,29 @@ public class EditPage extends HttpServlet {
 		
 		title = request.getParameter("title");
 		description = request.getParameter("description");
+		
 		address = request.getParameter("address");
-		JobTitle = request.getParameter("JobTitle");
+		
+		firstSuccessStory = request.getParameter("firstSuccessStory");
+		firstSuccessDescription = request.getParameter("firstSuccessDescription");
+		
+		JobTitle = request.getParameter("jobTitle");
+		JobDescription = request.getParameter("jobDescription");
+		
 		FAQQuestion = request.getParameter("FAQQuestion");
 		FAQAnswer = request.getParameter("FAQAnswer");
+		
 		profileName = request.getParameter("profileName");
 		bio = request.getParameter("bio");
 		email = request.getParameter("email");
 		
 		
-		if(missionStatement != null && history != null)
-		{
+		if(missionStatement != null && history != null) {
 			AddAboutUs(request,response);
 			return;
-		
 		}else if(title != null && description != null){
 			AddFirstTemplateTitle(request, response);
 			return;
-		
 		}else if(address != null){
 			AddAddress(request, response);
 			return;
@@ -201,6 +206,7 @@ public class EditPage extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(firstSuccessStory + ","  +firstSuccessDescription);
 	}
+	
 	private void AddJob(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
