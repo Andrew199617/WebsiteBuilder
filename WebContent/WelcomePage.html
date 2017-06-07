@@ -31,21 +31,21 @@ var LoadCreateWebsite = function(event) {
 $(document).on('submit', "#LoadData1", function(event) {
     
 	console.log('Post Sending')
-    $.post($('#LoadData1').attr("action"),  $('#LoadData1').serialize());
+    $.get($('#LoadData1').attr("action"),  $('#LoadData1').serialize());
 
 });
 
 $(document).on('submit', "#LoadData2", function(event) {
     
 	console.log('Post Sending')
-    $.post($('#LoadData2').attr("action"),  $('#LoadData2').serialize());
+    $.get($('#LoadData2').attr("action"),  $('#LoadData2').serialize());
 
 });
 
 $(document).on('submit', "#LoadData3", function(event) {
     
 	console.log('Post Sending')
-    $.post($('#LoadData3').attr("action"),  $('#LoadData3').serialize());
+    $.get($('#LoadData3').attr("action"),  $('#LoadData3').serialize());
 
 });
 
@@ -65,27 +65,21 @@ $(document).on('submit', "#LoadData3", function(event) {
             Template Screen
         </div>
         
-		<div class="individualTemplate">
-			<form id="LoadData1" method="get" action="/WebsiteBuilder/CreatePage">
-				<input class="form-control" name="templateNum" value="1"/>
-				<br>
-        		<input type='submit' name="submit" value="Template 1" />
-			</form>
-		</div>
-		<div class="individualTemplate">
-			<form id="LoadData2" method="get" action="/WebsiteBuilder/CreatePage">
-				<input class="form-control" name="templateNum" value="2"/>
-				<br>
-        		<input type='submit' name="submit" value="Template 2" />
-			</form>
-		</div>
-		<div class="individualTemplate">
-			<form id="LoadData3" method="get" action="/WebsiteBuilder/CreatePage">
-				<input class="form-control" name="templateNum" value="3"/>
-				<br>
-        		<input type='submit' name="submit" value="Template 3" />
-			</form>
-		</div>
+		<form id="LoadData1" method="get" action="/WebsiteBuilder/CreatePage">
+			<input class="hidden" name="templateNum" value="1"/>
+			<br>
+        	<input class="individualTemplate" type='submit' name="submit" value="Template 1" />
+		</form>
+		<form id="LoadData2" method="get" action="/WebsiteBuilder/CreatePage">
+			<input class="hidden" name="templateNum" value="2"/>
+			<br>
+        	<input class="individualTemplate" type='submit' name="submit" value="Template 2" />
+		</form>
+		<form id="LoadData3" method="get" action="/WebsiteBuilder/CreatePage">
+			<input class="hidden" name="templateNum" value="3"/>
+			<br>
+        	<input class="individualTemplate" type='submit' name="submit" value="Template 3" />
+		</form> 
 
 	</div>
 </div>
