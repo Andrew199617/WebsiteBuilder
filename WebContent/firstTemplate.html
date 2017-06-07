@@ -70,5 +70,20 @@ $(document).on("submit", "#EditPage", function(event) {
 	</div>
 	<br>
 
+	<div class="loginRegisterDiv">
+		<form id="EditPage" method="post" action="/WebsiteBuilder/EditPage">
+			<h2>Edit About Me</h2>
+			<label>Title:</label>
+			<textarea class="form-control" name="title"></textarea>
+			<br>
+			<label>Description:</label>
+			<textarea class="form-control" name="description"></textarea>
+			<h3 style="color:red;" id="error"></h3>
+			<br>
+			<input class="btn btn-default" type="submit" name="submit" value="Finish Page" />
+			<br>
+		</form>
+	</div>
+
 </body>
 </html>
