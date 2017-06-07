@@ -2,6 +2,26 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./styles/style.css">
+<script type="text/javascript" >
+
+$(document).ready(function(event) {
+    
+    $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
+
+    	if(responseText === "error"){
+			console.log('error')
+		}
+    	else {
+			$('#pages').html(responseText)
+    	}
+    });
+
+});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -9,23 +29,18 @@
 
 	<div class="header"  style="background-color: black; padding: 12px;">
 		<a class="btn btn-primary btn active" href="WelcomePage.html">Home</a>
+		<a class="btn btn-primary btn active" href="Pages.html">Pages</a>
 	</div>
 
 	<div id="pages">
-	    <div> 
-            Websites
-        </div>
-        
-        <div id="individualTemplate">
-        	<a href="firstTemplate.html">Template 1</a>
-        </div>
-        <div id="individualTemplate">
-        	<a href="secondTemplate.html">Template 2</a>
-        </div>
-        <div id="individualTemplate">
-        	<a href="thirdTemplate.html">Template 3</a>
-        </div>
+	</div>
 
+	
+	<div class="hidden">
+		<form id="LoadData" method="get" action="/WebsiteBuilder/ListPages">
+			<input class="form-control" name="dataNeeded" value=""/>
+			<br>
+		</form>
 	</div>
 </div>
 </body>

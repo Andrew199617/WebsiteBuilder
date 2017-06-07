@@ -33,6 +33,8 @@ public class CreatePage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pageName = request.getParameter("websiteName");
 		
+		String templateNum = request.getParameter("templateNum");
+		
 		HttpSession session = request.getSession(true);
 		User user = (User)session.getAttribute("user");
 		if(page == null) {
