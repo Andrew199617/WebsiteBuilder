@@ -20,6 +20,9 @@ public class Page {
 	@Column(name="name", unique = true, nullable=true)
 	private String name;
 	
+	@Column(name="templateNum", nullable=true)
+	private String templateNum;
+	
 	@Column(name="missionStatement", nullable=true)
 	private String missionStatement;
 	
@@ -202,6 +205,14 @@ public class Page {
 
 	public void setFAQAnswer(String fAQAnswer) {
 		FAQAnswer = fAQAnswer;
+	}
+
+	public String getTemplateNum() {
+		return templateNum;
+	}
+
+	public void setTemplateNum(String templateNum) {
+		this.templateNum = templateNum;
 	}
 	
 }
