@@ -11,7 +11,7 @@
 $(document).on("load", function(event) {
     
 	console.log('Loading!')
-    $.post('/WebsiteBuilder/EditPage' ,  $('#EditPage').serialize(), function(responseText) {
+    $.post($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
 		console.log('Post Sent')
     	if(responseText === "error"){
 			console.log('error')
@@ -90,6 +90,11 @@ $(document).on("submit", "#EditPage", function(event) {
 		</form>
 	</div>
 	<br>
-	
+	<div class="hidden">
+		<form id="LoadData" method="get" action="/WebsiteBuilder/EditPage">
+			<input class="form-control" name="dataNeeded" value="title/description"/>
+			<br>
+		</form>
+	</div>
 </body>
 </html>

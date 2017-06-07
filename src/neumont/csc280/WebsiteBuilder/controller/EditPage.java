@@ -1,6 +1,8 @@
 package neumont.csc280.WebsiteBuilder.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import neumont.csc280.WebsiteBuilder.entities.Page;
 import neumont.csc280.WebsiteBuilder.entities.User;
@@ -21,11 +24,20 @@ public class EditPage extends HttpServlet {
 	String history;
 	String firstTemplateTitle;
 	String firstTemplateDescription;
-	Page page = null;
-	boolean pageCreated = false;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String dataNeeded = request.getParameter("dataNeeded");
+		HttpSession session = request.getSession(true);
+		User user = (User)session.getAttribute("user");
+
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(firstTemplateTitle + ","  + firstTemplateDescription);
+		switch(dataNeeded){
+		case "title/description":
+			break;
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,17 +46,16 @@ public class EditPage extends HttpServlet {
 		firstTemplateTitle = request.getParameter("firstTemplateTitle");
 		firstTemplateDescription = request.getParameter("firstTemplateDescription");
 		
+		
 		if(missionStatement != null && history != null)
 		{
 			AddAboutUs(request,response);
 			return;
-		}else if(firstTemplateTitle != "" || firstTemplateTitle != null || 
+		} else if(firstTemplateTitle != "" || firstTemplateTitle != null || 
 				firstTemplateDescription != "" || firstTemplateDescription != null){
 			System.out.println("You made it here");
 			AddFirstTemplateTitle(request, response);
 			return;
-		}else{
-			System.out.print("Testing");
 		}
 		
 		response.setContentType("text/plain");
@@ -53,28 +64,15 @@ public class EditPage extends HttpServlet {
 	}
 
 	private void AddAboutUs(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
 		try {
-			page.setHistory(history);
-			page.setMissionStatement(missionStatement);
+			CreatePage.page.setHistory(history);
+			CreatePage.page.setMissionStatement(missionStatement);
 			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
-			
-			
+			dbSession.update(CreatePage.page);
+
 			transaction.commit();
 		}
 		catch(Exception e)
@@ -89,26 +87,14 @@ public class EditPage extends HttpServlet {
 	}
 	
 	private void AddFirstTemplateTitle(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
 		try {
-			page.setTitle(firstTemplateTitle);
-			page.setDescription(firstTemplateDescription);
-			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
+			CreatePage.page.setTitle(firstTemplateTitle);
+			CreatePage.page.setDescription(firstTemplateDescription);
+
+			dbSession.update(CreatePage.page);
 			
 			transaction.commit();
 		}

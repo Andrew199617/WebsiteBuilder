@@ -17,7 +17,7 @@ public class Page {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int pageId;
 	
-	@Column(name="name", nullable=true)
+	@Column(name="name", unique = true, nullable=true)
 	private String name;
 	
 	@Column(name="missionStatement", nullable=true)
