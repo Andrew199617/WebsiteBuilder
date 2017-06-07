@@ -6,6 +6,30 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="./styles/style.css">
+<script type="text/javascript" >
+
+$(document).on("submit", "#EditPage", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#EditPage').attr("action"),  $('#EditPage').serialize(), function(responseText) {
+		console.log('Post Sent')
+    	if(responseText === "error"){
+			console.log('error')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Success')
+    		let missionStatement = responseText.split(',')[0]
+			$('#missionStatement').html(missionStatement)
+    		let history = responseText.split(',')[1]
+			$('#history').html(history)
+    	}
+    });
+
+	event.preventDefault()
+});
+
+</script>
 <title>First Template</title>
 </head>
 <body>
@@ -29,6 +53,21 @@
 	    <p>User can add description to title here</p> 
 	  </div> 
 	</div>
+	</div>
+
+	<div class="loginRegisterDiv">
+		<form id="EditPage" method="post" action="/WebsiteBuilder/EditPage">
+			<h2>Edit About Me</h2>
+			<label>Title:</label>
+			<textarea class="form-control" name="title"></textarea>
+			<br>
+			<label>Description:</label>
+			<textarea class="form-control" name="description"></textarea>
+			<h3 style="color:red;" id="error"></h3>
+			<br>
+			<input class="btn btn-default" type="submit" name="submit" value="Finish Page" />
+			<br>
+		</form>
 	</div>
 
 </body>
