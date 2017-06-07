@@ -34,13 +34,19 @@
 	
 }
 
-h2 {
+#h2 {
 	text-align: center;
+}
+
+#deleteButton {
+	color: black;
+	border-radius: 5px;
 }
 
 #templateOneButton {
 	border-radius: 10px;
 	padding: 5px;
+	background-color: orange;
 }
 
 #individualTemplate {
@@ -74,6 +80,12 @@ a {
 
 #firstTemplateJumbo {
 	text-align: center;
+}
+
+#secondTemplateJumbo{
+	text-align: center;
+	background-color: red;
+	color: white;
 }
 
 #firstTemplateAddress {
