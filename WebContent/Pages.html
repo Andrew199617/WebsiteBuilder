@@ -9,7 +9,7 @@
 <script type="text/javascript" >
 
 $(document).ready(function(event) {
-    
+	console.log($('#LoadData').serialize())
     $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
 
     	if(responseText === "error"){
@@ -21,6 +21,14 @@ $(document).ready(function(event) {
     });
 
 });
+
+var buttonSubmit = function(val) {
+	console.log("submited")
+	$.post('/WebsiteBuilder/Delete', 'pageName=' + val,  function (responseText) {
+
+	})
+}
+
 </script>
 <title>Insert title here</title>
 </head>
