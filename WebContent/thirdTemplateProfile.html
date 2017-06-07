@@ -25,7 +25,7 @@ $(document).on("submit", "#EditPage", function(event) {
 			$('#profileName').html(profileName)
     		let email = responseText.split(',')[1]
 			$('#email').html(email)
-			let bio = responseText.split(',')[1]
+			let bio = responseText.split(',')[2]
 			$('#bio').html(bio)
     	}
     });
