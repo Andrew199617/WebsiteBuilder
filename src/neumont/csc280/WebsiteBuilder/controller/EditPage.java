@@ -57,7 +57,9 @@ public class EditPage extends HttpServlet {
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		Page page = new Page();
+		if(page == null){
+			page = new Page();
+		}
 		try {
 			page.setName("test");
 			page.setHistory(history);
@@ -86,9 +88,10 @@ public class EditPage extends HttpServlet {
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		Page page = new Page();
+		if(page == null){
+			page = new Page();
+		}
 		try {
-			page.setName("test");
 			page.setFirstTemplateTitle(firstTemplateTitle);
 			page.setFirstTemplateDescription(firstTemplateDescription);
 			page.setOwner(user);
