@@ -28,7 +28,7 @@ public class ListPages extends HttpServlet {
 		for (Page page : user.getPages())
 		{
 			response.getWriter().write("<div id=\"individualTemplate\">" +
-        	"<a href=\"firstTemplate.html\">" + "Page Name: " + page.getName() + "<br>" + "Page Description: " + page.getDescription() + "<br>" +"<button id='deleteButton' onclick='doFunction();'>Delete</button>" + "</a></div>");
+        	"<a href=\"/WebsiteBuilder/load/" + page.getName().toLowerCase() + "\">" + "Page Name: " + page.getName() + "<br>" + "Page Description: " + page.getDescription() + "</a><br><button onclick='buttonSubmit(\"" + page.getName() + "\")'>Delete</button></div>");
 		}
 		response.getWriter().write("</div>");
 		

@@ -33,7 +33,7 @@ public class LoadPage extends HttpServlet {
 			for( Page page : user.getPages()) {
 				if(page.getName().equalsIgnoreCase(pathParts[1]))
 				{
-					System.out.println("page found");
+					CreatePage.page = page;
 					switch(page.getTemplateNum()) {
 					case "1":
 						welcomePage = new File(DoLogin.MyPath + "/firstTemplate.html");
