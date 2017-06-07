@@ -10,6 +10,24 @@
 </head>
 <script type="text/javascript" >
 
+$(document).ready(function(event) {
+    
+    $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
+		
+    	if(responseText === "error"){
+			
+		}
+    	else {
+    		let firstJobTitle = responseText.split(',')[0]
+			$('#firstJobTitle').html(firstJobTitle)
+    		let firstJobDescription = responseText.split(',')[1]
+			$('#firstJobDescription').html(firstJobDescription)
+			
+    	}
+    });
+
+});
+
 $(document).on("submit", "#EditPage", function(event) {
     
 	console.log('Post Sending')
@@ -25,10 +43,7 @@ $(document).on("submit", "#EditPage", function(event) {
 			$('#firstJobTitle').html(firstJobTitle)
     		let firstJobDescription = responseText.split(',')[1]
 			$('#firstJobDescription').html(firstJobDescription)
-			let secondJobTitle = responseText.split(',')[0]
-			$('#secondJobTitle').html(secondJobTitle)
-    		let secondJobDescription = responseText.split(',')[1]
-			$('#secondJobDescription').html(secondJobDescription)
+
     	}
     });
 
@@ -76,6 +91,12 @@ $(document).on("submit", "#EditPage", function(event) {
 		</form>
 	</div>
 	<br>
+	<div class="hidden">
+		<form id="LoadData" method="get" action="/WebsiteBuilder/EditPage">
+			<input class="form-control" name="dataNeeded" value="jobs"/>
+			<br>
+		</form>
+	</div>
 	
 </body>
 </html>

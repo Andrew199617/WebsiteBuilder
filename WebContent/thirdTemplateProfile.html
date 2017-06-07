@@ -10,6 +10,26 @@
 </head>
 <script type="text/javascript" >
 
+$(document).ready(function(event) {
+    
+    $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
+		
+    	if(responseText === "error"){
+			
+		}
+    	else {
+    		let profileName = responseText.split(',')[0]
+			$('#profileName').html(profileName)
+    		let email = responseText.split(',')[1]
+			$('#email').html(email)
+			let bio = responseText.split(',')[2]
+			$('#bio').html(bio)
+			
+    	}
+    });
+
+});
+
 $(document).on("submit", "#EditPage", function(event) {
     
 	console.log('Post Sending')
@@ -73,6 +93,13 @@ $(document).on("submit", "#EditPage", function(event) {
 		</form>
 	</div>
 	<br>
+	
+	<div class="hidden">
+		<form id="LoadData" method="get" action="/WebsiteBuilder/EditPage">
+			<input class="form-control" name="dataNeeded" value="profile"/>
+			<br>
+		</form>
+	</div>
 
 </body>
 </html>
