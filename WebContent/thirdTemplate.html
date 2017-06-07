@@ -8,6 +8,30 @@
 <link rel="stylesheet" href="./styles/style.css">
 <title>First Template</title>
 </head>
+<script type="text/javascript" >
+
+$(document).on("submit", "#EditPage", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#EditPage').attr("action"),  $('#EditPage').serialize(), function(responseText) {
+		console.log('Post Sent')
+    	if(responseText === "error"){
+			console.log('error')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Success')
+    		let thirdTemplateTitle = responseText.split(',')[0]
+			$('#thirdTemplateTitle').html(thirdTemplateTitle)
+    		let thirdTemplateDescription = responseText.split(',')[1]
+			$('#thirdTemplateDescription').html(thirdTemplateDescription)
+    	}
+    });
+
+	event.preventDefault()
+});
+
+</script>
 <body>
 	<div class="header"  style="background-color: black; padding: 12px;">
 		<a class="btn btn-primary btn active" href="WelcomePage.html">Home</a>
@@ -18,16 +42,31 @@
 		<div class="header"  style="background-color: black; padding: 12px;">
 			<a class="btn btn-primary btn active" href="thirdTemplate.html">Home</a>
 			<a class="btn btn-primary btn active" href="thirdTemplateProfile.html">Profile</a>
-			<a class="btn btn-primary btn active" href="thirdTemplatePress.html">Press</a>
+			<a class="btn btn-primary btn active" href="thirdTemplatePress.html">FAQ</a>
 		</div>
 		<div class="container">
 			<br>
 			  <div class="jumbotron" id="firstTemplateJumbo">
-			    <h1>User can edit Title here</h1> 
-			    <p>User can add description to title here</p> 
+			    <h1 id="thirdTemplateTitle">User can edit Title here</h1> 
+			    <p id="thirdTemplateDescription">User can add description to title here</p> 
 			  </div> 
 	</div>
 	</div>
+	<div class="loginRegisterDiv">
+		<form id="EditPage" method="post" action="/WebsiteBuilder/EditPage">
+			<h2>Edit the front page</h2>
+			<label>Edit title:</label>
+			<textarea class="form-control" name="thirdTemplateTitle"></textarea>
+			<br>
+			<label>Description:</label>
+			<textarea class="form-control" name="thirdTemplateDescription"></textarea>
+			<h3 style="color:red;" id="error"></h3>
+			<br>
+			<input class="btn btn-default" type="submit" name="submit" value="Finish Page" />
+			<br>
+		</form>
+	</div>
+	<br>
 
 </body>
 </html>

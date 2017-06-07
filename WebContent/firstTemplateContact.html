@@ -8,6 +8,28 @@
 <link rel="stylesheet" href="./styles/style.css">
 <title>First Template</title>
 </head>
+<script type="text/javascript" >
+
+$(document).on("submit", "#EditPage", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#EditPage').attr("action"),  $('#EditPage').serialize(), function(responseText) {
+		console.log('Post Sent')
+    	if(responseText === "error"){
+			console.log('error')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Success')
+    		let address = responseText.split(',')[0]
+			$('#address').html(address)
+    	}
+    });
+
+	event.preventDefault()
+});
+
+</script>
 <body>
 	<div class="header"  style="background-color: black; padding: 12px;">
 		<a class="btn btn-primary btn active" href="WelcomePage.html">Home</a>
@@ -25,11 +47,24 @@
 	<br>
 	  <div class="container" id="firstTemplateAddress">
 	  	<h2>Corporate Address</h2>
-	  	<h3>1234 Demo Address Lane</h3>
-	  	<h3>Test, Utah 88888</h3>
+	  	<h3 id="address">1234 Demo Address Lane Test, Utah 88888</h3>
+	  	<h3></h3>
 	  </div>
 	</div>
 	</div>
+	<div class="loginRegisterDiv">
+		<form id="EditPage" method="post" action="/WebsiteBuilder/EditPage">
+			<h2>Edit Address</h2>
+			<label>Address:</label>
+			<textarea class="form-control" name="address"></textarea>
+			<br>
+			<h3 style="color:red;" id="error"></h3>
+			<br>
+			<input class="btn btn-default" type="submit" name="submit" value="Finish Page" />
+			<br>
+		</form>
+	</div>
+	<br>
 
 </body>
 </html>

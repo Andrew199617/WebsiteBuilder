@@ -5,9 +5,41 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./styles/style.css">
 <title>First Template</title>
 </head>
+<script type="text/javascript" >
+
+$(document).on("submit", "#EditPage", function(event) {
+    
+	console.log('Post Sending')
+    $.post($('#EditPage').attr("action"),  $('#EditPage').serialize(), function(responseText) {
+		console.log('Post Sent')
+    	if(responseText === "error"){
+			console.log('error')
+			$('#error').text('Invalid Username or Password');
+		}
+    	else {
+			console.log('Success')
+    		let firstFAQQuestion = responseText.split(',')[0]
+			$('#firstFAQQuestion').html(firstFAQQuestion)
+    		let firstFAQAnswer = responseText.split(',')[1]
+			$('#firstFAQAnswer').html(firstFAQAnswer)
+			let secondFAQQuestion = responseText.split(',')[0]
+			$('#secondFAQQuestion').html(secondFAQQuestion)
+    		let secondFAQAnswer = responseText.split(',')[1]
+			$('#secondFAQAnswer').html(secondFAQAnswer)
+			let thirdFAQQuestion = responseText.split(',')[0]
+			$('#thirdFAQQuestion').html(thirdFAQQuestion)
+    		let thirdFAQAnswer = responseText.split(',')[1]
+			$('#thirdFAQAnswer').html(thirdFAQAnswer)
+    	}
+    });
+
+	event.preventDefault()
+});
+
+</script>
 <body>
 	<div class="header"  style="background-color: black; padding: 12px;">
 		<a class="btn btn-primary btn active" href="WelcomePage.html">Home</a>
@@ -18,9 +50,53 @@
 		<div class="header"  style="background-color: black; padding: 12px;">
 			<a class="btn btn-primary btn active" href="thirdTemplate.html">Home</a>
 			<a class="btn btn-primary btn active" href="thirdTemplateProfile.html">Profile</a>
-			<a class="btn btn-primary btn active" href="thirdTemplatePress.html">Press</a>
+			<a class="btn btn-primary btn active" href="thirdTemplatePress.html">FAQ</a>
+			<br>
+			<div id="thirdTemplateJobsDiv">
+			
+				<h1>FAQ</h1> 
+			    <h3 id="firstFAQQuestion">I want to make a purchase what do I do?</h3>
+			    <h4 id="firstFAQAnswer">Go to our profile page and email us your order</h4>
+			    <br>
+			    <h3 id="secondFAQQuestion">I want to make a purchase what do I do?</h3>
+			    <h4 id="secondFAQAnswer">Go to our profile page and email us your order</h4>
+			    <br>
+			    <h3 id="thirdFAQQuestion">I want to make a purchase what do I do?</h3>
+			    <h4 id="thirdFAQAnswer">Go to our profile page and email us your order</h4>
+			    <br>
+
+			  </div>
 		</div>
 	</div>
+	<div class="loginRegisterDiv">
+		<form id="EditPage" method="post" action="/WebsiteBuilder/EditPage">
+			<h2>Edit FAQ:</h2>
+			<label>First Question:</label>
+			<textarea class="form-control" name="firstFAQQuestion"></textarea>
+			<br>
+			<label>First Answer:</label>
+			<textarea class="form-control" name="firstFAQAnswer"></textarea>
+			<br>
+			<label>Second Question:</label>
+			<textarea class="form-control" name="secondFAQQuestion"></textarea>
+			<br>
+			<label>Second Answer:</label>
+			<textarea class="form-control" name="secondFAQAnswer"></textarea>
+			<br>
+			<label>Third Question:</label>
+			<textarea class="form-control" name="thirdFAQQuestion"></textarea>
+			<br>
+			<label>Third Answer:</label>
+			<textarea class="form-control" name="thirdFAQAnswer"></textarea>
+			<br>
+			
+			<h3 style="color:red;" id="error"></h3>
+			<br>
+			<input class="btn btn-default" type="submit" name="submit" value="Finish Page" />
+			<br>
+		</form>
+	</div>
+	<br>
 	
 
 </body>
