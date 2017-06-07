@@ -1,0 +1,88 @@
+@CHARSET "ISO-8859-1";
+
+.loginRegisterDiv {
+	text-align: center;
+	display: inline-block;
+	border: 1px solid black;
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px #888888;
+	background-color: orange;
+	color: white;
+	padding: 15px;
+	border-color: white;
+	text-align: center;
+    margin: 5px;
+    width: 350px;
+
+}
+
+.header {
+	background-color: black;
+	width: 100%;
+	height: 12%;
+	position: relative;
+	top: 0;
+}
+
+#individualTemplate {
+    display: inline-block;
+	border: 1px solid black;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #888888;
+	background-color: #9A0CE8;
+	color: white;
+	padding: 20px;
+	border-color: white;
+	text-align: center;
+    margin: 5px;
+    width: 350px;
+    max-height: 150px;
+}
+
+a {
+	color: white;
+}
+
+#firstTemplatedWebsite {
+	margin: 40px;
+	border: 5px solid black;
+}
+
+#thirdTemplatedWebsite {
+	margin: 40px;
+	border: 5px solid black;
+}
+
+#firstTemplateJumbo {
+	text-align: center;
+}
+
+#firstTemplateAddress {
+	text-align: center;
+}
+
+#secondTemplateHeaderDiv {
+	padding: 20px;
+	background-color: gray;
+}
+
+#secondTemplateInfoDiv {
+	padding: 20px;
+	background-color: white;
+}
+
+#secondTemplatedWebsite {
+	margin: 40px;
+	border: 5px solid black;
+	background-color: red;
+}
+
+#secondTemplateJobsDiv {
+	padding: 20px;
+	background-color: white;
+}
+
+#thirdTemplateJobsDiv {
+	padding: 20px;
+	background-color: white;
+}

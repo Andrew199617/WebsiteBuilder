@@ -1,21 +1,27 @@
 package neumont.csc280.WebsiteBuilder.entities;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
 
 @Entity(name="users")
 public class User {
-	private int userID;
-	
-	private String username;
-	
-	private String password;
 
 	@Id
-	@Column(name="user_id")
+	@Column(name="user_id", unique = true, nullable = false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int userID;
+	
+	@Column(name = "username", unique = true, nullable = false)
+	private String username;
+
+	@Column(name="pword", unique = false, nullable = false)
+	private String password;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="owner")
+	private List<Page> pages = new ArrayList<>();
+
 	public int getUserID() {
 		return userID;
 	}
@@ -23,8 +29,7 @@ public class User {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-
-	@Column(name="username", nullable=false)
+	
 	public String getUsername() {
 		return username;
 	}
@@ -33,13 +38,20 @@ public class User {
 		this.username = username;
 	}
 
-	@Column(name="pword", nullable=false)
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Page> getPages() {
+		return pages;
+	}
+
+	public void setPages(List<Page> pages) {
+		this.pages = pages;
 	}
 	
 }

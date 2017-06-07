@@ -22,3 +22,6 @@
 hs_err_pid*
 /build/
 /.classpath
+/bin/
+/src/hibernate.cfg.xml
+/src/neumont/csc280/WebsiteBuilder/controller/DoLogin.java
