@@ -45,11 +45,11 @@ public class EditPage extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		User user = (User)session.getAttribute("user");
 
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(firstTemplateTitle + ","  + firstTemplateDescription);
 		switch(dataNeeded){
 		case "title/description":
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(title + ","  + description);
 			break;
 		}
 	}
@@ -138,8 +138,8 @@ public class EditPage extends HttpServlet {
 		
 		try {
 			
-			CreatePage.page.setTitle(firstTemplateTitle);
-			CreatePage.page.setDescription(firstTemplateDescription);
+			CreatePage.page.setTitle(title);
+			CreatePage.page.setDescription(description);
 
 			dbSession.update(CreatePage.page);
 			
@@ -158,25 +158,13 @@ public class EditPage extends HttpServlet {
 	}
 	
 	private void AddAddress(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
 		try {
-			page.setAddress(address);
+			CreatePage.page.setAddress(address);
 			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
+			dbSession.update(CreatePage.page);
 			
 			transaction.commit();
 		}
@@ -192,26 +180,14 @@ public class EditPage extends HttpServlet {
 	}
 	
 	private void AddSuccessStory(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
 		try {
-			page.setSuccessStory(firstSuccessStory);
-			page.setSuccessDescription(firstSuccessDescription);
+			CreatePage.page.setSuccessStory(firstSuccessStory);
+			CreatePage.page.setSuccessDescription(firstSuccessDescription);
 			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
+			dbSession.update(CreatePage.page);
 			
 			transaction.commit();
 		}
@@ -226,26 +202,14 @@ public class EditPage extends HttpServlet {
 		response.getWriter().write(firstSuccessStory + ","  +firstSuccessDescription);
 	}
 	private void AddJob(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
 		try {
-			page.setJobTitle(JobTitle);
-			page.setJobDescription(JobDescription);
+			CreatePage.page.setJobTitle(JobTitle);
+			CreatePage.page.setJobDescription(JobDescription);
 			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
+			dbSession.update(CreatePage.page);
 			
 			transaction.commit();
 		}
@@ -261,26 +225,14 @@ public class EditPage extends HttpServlet {
 	}
 	
 	private void AddFAQ(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
 		try {
-			page.setFAQQuestion(FAQQuestion);
-			page.setFAQAnswer(FAQAnswer);
+			CreatePage.page.setFAQQuestion(FAQQuestion);
+			CreatePage.page.setFAQAnswer(FAQAnswer);
 			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
+			dbSession.update(CreatePage.page);
 			
 			transaction.commit();
 		}
@@ -295,27 +247,15 @@ public class EditPage extends HttpServlet {
 		response.getWriter().write(FAQQuestion + "," + FAQAnswer);
 	}
 	private void AddProfile(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
 		
 		Session dbSession = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = dbSession.beginTransaction();
-		if(page == null){
-			page = new Page();
-			page.setOwner(user);
-			user.getPages().add(page);
-		}
 		try {
-			page.setProfileName(profileName);
-			page.setBio(bio);
-			page.setEmail(email);
+			CreatePage.page.setProfileName(profileName);
+			CreatePage.page.setBio(bio);
+			CreatePage.page.setEmail(email);
 			
-			if(pageCreated){
-				dbSession.update(page);
-			} else {
-				dbSession.save(page);
-				pageCreated = true;
-			}
+			dbSession.update(CreatePage.page);
 			
 			transaction.commit();
 		}
