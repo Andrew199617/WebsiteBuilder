@@ -12,11 +12,9 @@
 <script type="text/javascript" >
 
 $(document).ready(function(event) {
-    
+    console.log('loaded')
     $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
-		
     	if(responseText === "error"){
-			
 		}
     	else {
     		let secondTemplateTitle = responseText.split(',')[0]
@@ -85,7 +83,7 @@ $(document).on("submit", "#EditPage", function(event) {
 	<br>
 	<div class="hidden">
 		<form id="LoadData" method="get" action="/WebsiteBuilder/EditPage">
-			<input class="form-control" name="dataNeeded" value="secondTitle/Description"/>
+			<input class="form-control" name="dataNeeded" value="title/description"/>
 			<br>
 		</form>
 	</div>

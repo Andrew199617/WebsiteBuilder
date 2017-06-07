@@ -86,20 +86,6 @@ public class EditPage extends HttpServlet {
 				response.getWriter().write("error");
 			}
 			break;
-		case "secondTitle/Description":
-			if(CreatePage.page.getTitle() != null && CreatePage.page.getDescription() != null)
-			{
-				System.out.println(CreatePage.page.getTitle());
-				response.setContentType("text/plain");
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write(CreatePage.page.getTitle() + ","  + CreatePage.page.getDescription());
-			}
-			else {
-				response.setContentType("text/plain");
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write("error");
-			}
-			break;
 		case "successStory":
 			if(CreatePage.page.getSuccessStory() != null && CreatePage.page.getSuccessDescription() != null)
 			{
@@ -121,20 +107,6 @@ public class EditPage extends HttpServlet {
 				response.setContentType("text/plain");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(CreatePage.page.getJobTitle() + ","  + CreatePage.page.getJobDescription());
-			}
-			else {
-				response.setContentType("text/plain");
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write("error");
-			}
-			break;
-		case "thirdTitle/Description":
-			if(CreatePage.page.getTitle() != null && CreatePage.page.getDescription() != null)
-			{
-				System.out.println(CreatePage.page.getTitle());
-				response.setContentType("text/plain");
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write(CreatePage.page.getTitle() + ","  + CreatePage.page.getDescription());
 			}
 			else {
 				response.setContentType("text/plain");
