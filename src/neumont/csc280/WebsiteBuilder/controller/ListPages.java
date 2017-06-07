@@ -28,7 +28,7 @@ public class ListPages extends HttpServlet {
 		for (Page page : user.getPages())
 		{
 			response.getWriter().write("<div id=\"individualTemplate\">" +
-        	"<a href=\"firstTemplate.html\">" + page.getName() +"</a></div>");
+        	"<a href=\"firstTemplate.html\">" + "Page Name: " + page.getName() + "<br>" + "Page Description: " + page.getDescription() + "</a></div>");
 		}
 		response.getWriter().write("</div>");
 		

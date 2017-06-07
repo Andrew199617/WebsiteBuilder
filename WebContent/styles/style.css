@@ -24,6 +24,25 @@
 	top: 0;
 }
 
+#home {
+	margin: 10px;
+	padding: 20px;
+}
+
+#templateDiv {
+	padding-right: 20px;
+	
+}
+
+h2 {
+	text-align: center;
+}
+
+#templateOneButton {
+	border-radius: 10px;
+	padding: 5px;
+}
+
 #individualTemplate {
     display: inline-block;
 	border: 1px solid black;
