@@ -19,8 +19,20 @@ public class EditPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String missionStatement;
 	String history;
-	String firstTemplateTitle;
-	String firstTemplateDescription;
+	String title;
+	String description;
+	String address;
+	String firstSuccessStory;
+	String firstSuccessDescription;
+	String secondSuccessStory;
+	String secondSuccessDescription;
+	String JobTitle;
+	String JobDescription;
+	String FAQQuestion;
+	String FAQAnswer;
+	String profileName;
+	String email;
+	String bio;
 	Page page = null;
 	boolean pageCreated = false;
        
@@ -31,19 +43,40 @@ public class EditPage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		missionStatement = request.getParameter("missionStatement");
 		history = request.getParameter("history");
-		firstTemplateTitle = request.getParameter("firstTemplateTitle");
-		firstTemplateDescription = request.getParameter("firstTemplateDescription");
+		title = request.getParameter("title");
+		description = request.getParameter("description");
+		address = request.getParameter("address");
+		JobTitle = request.getParameter("JobTitle");
+		FAQQuestion = request.getParameter("FAQQuestion");
+		FAQAnswer = request.getParameter("FAQAnswer");
+		profileName = request.getParameter("profileName");
+		bio = request.getParameter("bio");
+		email = request.getParameter("email");
 		
 		if(missionStatement != null && history != null)
 		{
 			AddAboutUs(request,response);
 			return;
-		}else if(firstTemplateTitle != "" || firstTemplateTitle != null || 
-				firstTemplateDescription != "" || firstTemplateDescription != null){
-			System.out.println("You made it here");
+		}else if(title != null && description != null){
 			AddFirstTemplateTitle(request, response);
 			return;
-		}else{
+		}else if(address != null){
+			AddAddress(request, response);
+			return;
+		}else if(firstSuccessStory != null && firstSuccessDescription != null){
+			AddSuccessStory(request, response);
+			return;
+		}else if(JobTitle != null && JobDescription != null){
+			AddJob(request, response);
+			return;
+		}else if(FAQQuestion != null && FAQAnswer != null){
+			AddFAQ(request, response);
+			return;
+		}else if(profileName != null && bio != null && bio != email){
+			AddProfile(request, response);
+			return;
+		}
+		else{
 			System.out.print("Testing");
 		}
 		
@@ -100,8 +133,8 @@ public class EditPage extends HttpServlet {
 			user.getPages().add(page);
 		}
 		try {
-			page.setTitle(firstTemplateTitle);
-			page.setDescription(firstTemplateDescription);
+			page.setTitle(title);
+			page.setDescription(description);
 			
 			if(pageCreated){
 				dbSession.update(page);
@@ -120,7 +153,181 @@ public class EditPage extends HttpServlet {
 		
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(firstTemplateTitle + ","  + firstTemplateDescription);
+		response.getWriter().write(title + ","  + description);
 	}
+	
+	private void AddAddress(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(true);
+		User user = (User)session.getAttribute("user");
+		
+		Session dbSession = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = dbSession.beginTransaction();
+		if(page == null){
+			page = new Page();
+			page.setOwner(user);
+			user.getPages().add(page);
+		}
+		try {
+			page.setAddress(address);
+			
+			if(pageCreated){
+				dbSession.update(page);
+			} else {
+				dbSession.save(page);
+				pageCreated = true;
+			}
+			
+			transaction.commit();
+		}
+		catch(Exception e)
+		{
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(address);
+	}
+	
+	private void AddSuccessStory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(true);
+		User user = (User)session.getAttribute("user");
+		
+		Session dbSession = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = dbSession.beginTransaction();
+		if(page == null){
+			page = new Page();
+			page.setOwner(user);
+			user.getPages().add(page);
+		}
+		try {
+			page.setSuccessStory(firstSuccessStory);
+			page.setSuccessDescription(firstSuccessDescription);
+			
+			if(pageCreated){
+				dbSession.update(page);
+			} else {
+				dbSession.save(page);
+				pageCreated = true;
+			}
+			
+			transaction.commit();
+		}
+		catch(Exception e)
+		{
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(firstSuccessStory + ","  +firstSuccessDescription);
+	}
+	private void AddJob(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(true);
+		User user = (User)session.getAttribute("user");
+		
+		Session dbSession = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = dbSession.beginTransaction();
+		if(page == null){
+			page = new Page();
+			page.setOwner(user);
+			user.getPages().add(page);
+		}
+		try {
+			page.setJobTitle(JobTitle);
+			page.setJobDescription(JobDescription);
+			
+			if(pageCreated){
+				dbSession.update(page);
+			} else {
+				dbSession.save(page);
+				pageCreated = true;
+			}
+			
+			transaction.commit();
+		}
+		catch(Exception e)
+		{
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(JobTitle + "," + JobDescription);
+	}
+	
+	private void AddFAQ(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(true);
+		User user = (User)session.getAttribute("user");
+		
+		Session dbSession = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = dbSession.beginTransaction();
+		if(page == null){
+			page = new Page();
+			page.setOwner(user);
+			user.getPages().add(page);
+		}
+		try {
+			page.setFAQQuestion(FAQQuestion);
+			page.setFAQAnswer(FAQAnswer);
+			
+			if(pageCreated){
+				dbSession.update(page);
+			} else {
+				dbSession.save(page);
+				pageCreated = true;
+			}
+			
+			transaction.commit();
+		}
+		catch(Exception e)
+		{
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(FAQQuestion + "," + FAQAnswer);
+	}
+	private void AddProfile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(true);
+		User user = (User)session.getAttribute("user");
+		
+		Session dbSession = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = dbSession.beginTransaction();
+		if(page == null){
+			page = new Page();
+			page.setOwner(user);
+			user.getPages().add(page);
+		}
+		try {
+			page.setProfileName(profileName);
+			page.setBio(bio);
+			page.setEmail(email);
+			
+			if(pageCreated){
+				dbSession.update(page);
+			} else {
+				dbSession.save(page);
+				pageCreated = true;
+			}
+			
+			transaction.commit();
+		}
+		catch(Exception e)
+		{
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(profileName + "," + email + "," + bio);
+	}
+
 
 }

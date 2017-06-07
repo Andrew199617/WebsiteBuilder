@@ -26,10 +26,10 @@ public class Page {
 	@Column(name="history", nullable=true)
 	private String history;
 	
-	@Column(name="Title", nullable=true)
+	@Column(name="title", nullable=true)
 	private String title;
 	
-	@Column(name="Description", nullable=true)
+	@Column(name="description", nullable=true)
 	private String description;
 	
 	@Column(name="address", nullable=true)

@@ -58,12 +58,7 @@ $(document).on("submit", "#EditPage", function(event) {
 			    <h3 id="firstFAQQuestion">I want to make a purchase what do I do?</h3>
 			    <h4 id="firstFAQAnswer">Go to our profile page and email us your order</h4>
 			    <br>
-			    <h3 id="secondFAQQuestion">I want to make a purchase what do I do?</h3>
-			    <h4 id="secondFAQAnswer">Go to our profile page and email us your order</h4>
-			    <br>
-			    <h3 id="thirdFAQQuestion">I want to make a purchase what do I do?</h3>
-			    <h4 id="thirdFAQAnswer">Go to our profile page and email us your order</h4>
-			    <br>
+			    
 
 			  </div>
 		</div>
@@ -72,23 +67,12 @@ $(document).on("submit", "#EditPage", function(event) {
 		<form id="EditPage" method="post" action="/WebsiteBuilder/EditPage">
 			<h2>Edit FAQ:</h2>
 			<label>First Question:</label>
-			<textarea class="form-control" name="firstFAQQuestion"></textarea>
+			<textarea class="form-control" name="FAQQuestion"></textarea>
 			<br>
 			<label>First Answer:</label>
-			<textarea class="form-control" name="firstFAQAnswer"></textarea>
+			<textarea class="form-control" name="FAQAnswer"></textarea>
 			<br>
-			<label>Second Question:</label>
-			<textarea class="form-control" name="secondFAQQuestion"></textarea>
-			<br>
-			<label>Second Answer:</label>
-			<textarea class="form-control" name="secondFAQAnswer"></textarea>
-			<br>
-			<label>Third Question:</label>
-			<textarea class="form-control" name="thirdFAQQuestion"></textarea>
-			<br>
-			<label>Third Answer:</label>
-			<textarea class="form-control" name="thirdFAQAnswer"></textarea>
-			<br>
+			
 			
 			<h3 style="color:red;" id="error"></h3>
 			<br>
