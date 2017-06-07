@@ -1,5 +1,8 @@
 package neumont.csc280.WebsiteBuilder.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,25 +18,30 @@ import neumont.csc280.WebsiteBuilder.entities.User;
 public class MainView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public MainView() {
-        super();
-
-    }
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
-		User currentUser = (User) session.getAttribute("user");
-		if(currentUser == null) {
-			session.setAttribute("error", "You must login");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-			return;
+
+		File welcomePage = new File(DoLogin.MyPath + "index.html");
+		BufferedReader br = new BufferedReader(new FileReader(welcomePage));
+	    StringBuilder sb = new StringBuilder();
+		try {
+		    String line = br.readLine();
+		
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append("\n");
+		        line = br.readLine();
+		    }
+		} finally {
+		    br.close();
 		}
-		request.setAttribute("user", currentUser);
-		request.getRequestDispatcher("main.jsp").forward(request, response);
+		
+		response.setCharacterEncoding("UTF-8");
+	    response.setContentType("text/html");
+		response.getWriter().write(sb.toString());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		doGet(request, response);
 	}
 
 }

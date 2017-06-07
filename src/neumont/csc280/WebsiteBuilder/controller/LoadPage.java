@@ -17,7 +17,7 @@ import neumont.csc280.WebsiteBuilder.entities.User;
 /**
  * Servlet implementation class LoadPage
  */
-@WebServlet("/*")
+@WebServlet("/load/*")
 public class LoadPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,6 +48,11 @@ public class LoadPage extends HttpServlet {
 				}
 			}
 		}
+		
+		if(pathInfo.contains(".html"))
+		{
+			welcomePage = new File(DoLogin.MyPath + pathInfo);
+		} 
 		
 		if(welcomePage != null)
 		{
