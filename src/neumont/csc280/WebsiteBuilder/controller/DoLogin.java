@@ -25,7 +25,7 @@ import neumont.csc280.WebsiteBuilder.entities.User;
 public class DoLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public static String MyPath = "D:/Self Taught/Eclipse/WebsiteBuilder/WebContent";
+	public static String MyPath = "C:/Users/Daniel Kuhrmeyer/EclipseProjects/WebsiteBuilder/WebsiteBuilder/WebContent";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
@@ -58,6 +58,8 @@ public class DoLogin extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", user);
 		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
 
 		File welcomePage = new File(MyPath + "/WelcomePage.html");
 		
@@ -74,10 +76,8 @@ public class DoLogin extends HttpServlet {
 		} finally {
 		    br.close();
 		}
-
-		response.setCharacterEncoding("UTF-8");
-	    response.setContentType("text/html");
-		response.getWriter().write(sb.toString());
+		    
+		response.getWriter().write(user.getUsername() + "," + sb.toString());
 	}
 	
 	private void handleInvalidLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
