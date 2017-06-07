@@ -42,14 +42,12 @@ public class EditPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String dataNeeded = request.getParameter("dataNeeded");
-		HttpSession session = request.getSession(true);
-		User user = (User)session.getAttribute("user");
 
 		switch(dataNeeded){
 		case "title/description":
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(title + ","  + description);
+			response.getWriter().write(CreatePage.page.getTitle() + ","  + CreatePage.page.getDescription());
 			break;
 		}
 	}
