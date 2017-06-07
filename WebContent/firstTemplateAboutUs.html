@@ -8,6 +8,24 @@
 <link rel="stylesheet" href="./styles/style.css">
 <script type="text/javascript" >
 
+$(document).ready(function(event) {
+    
+    $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
+		
+    	if(responseText === "error"){
+			
+		}
+    	else {
+    		let missionStatement = responseText.split(',')[0]
+			$('#missionStatement').html(missionStatement)
+    		let history = responseText.split(',')[1]
+			$('#history').html(history)
+			
+    	}
+    });
+
+});
+
 $(document).on("submit", "#EditPage", function(event) {
     
 	console.log('Post Sending')
@@ -74,6 +92,12 @@ $(document).on("submit", "#EditPage", function(event) {
 		</form>
 	</div>
 	<br>
+	<div class="hidden">
+		<form id="LoadData" method="get" action="/WebsiteBuilder/EditPage">
+			<input class="form-control" name="dataNeeded" value="missionStatement/history"/>
+			<br>
+		</form>
+	</div>
 
 </body>
 </html>

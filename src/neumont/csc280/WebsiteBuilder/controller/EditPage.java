@@ -58,7 +58,121 @@ public class EditPage extends HttpServlet {
 				response.getWriter().write("error");
 			}
 			break;
+		case "missionStatement/history":
+			if(CreatePage.page.getMissionStatement() != null && CreatePage.page.getHistory() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getMissionStatement() + ","  + CreatePage.page.getHistory());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
+			break;
+		case "address":
+			if(CreatePage.page.getAddress() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getAddress());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
+			break;
+		case "secondTitle/Description":
+			if(CreatePage.page.getTitle() != null && CreatePage.page.getDescription() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getTitle() + ","  + CreatePage.page.getDescription());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
+			break;
+		case "successStory":
+			if(CreatePage.page.getSuccessStory() != null && CreatePage.page.getSuccessDescription() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getSuccessStory() + ","  + CreatePage.page.getSuccessDescription());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
+			break;
+		case "jobs":
+			if(CreatePage.page.getJobTitle() != null && CreatePage.page.getJobDescription() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getJobTitle() + ","  + CreatePage.page.getJobDescription());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
+			break;
+		case "thirdTitle/Description":
+			if(CreatePage.page.getTitle() != null && CreatePage.page.getDescription() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getTitle() + ","  + CreatePage.page.getDescription());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
+			break;
+		case "faq":
+			if(CreatePage.page.getFAQQuestion() != null && CreatePage.page.getFAQAnswer() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getFAQQuestion() + ","  + CreatePage.page.getFAQAnswer());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
+			break;
+		case "profile":
+			if(CreatePage.page.getProfileName() != null && CreatePage.page.getBio() != null && CreatePage.page.getEmail() != null)
+			{
+				System.out.println(CreatePage.page.getTitle());
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(CreatePage.page.getProfileName() + ","  + CreatePage.page.getBio() + ","  + CreatePage.page.getEmail());
+			}
+			else {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("error");
+			}
+			break;
+			
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

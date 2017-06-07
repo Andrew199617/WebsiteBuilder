@@ -10,6 +10,24 @@
 </head>
 <script type="text/javascript" >
 
+$(document).ready(function(event) {
+    
+    $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
+		
+    	if(responseText === "error"){
+			
+		}
+    	else {
+    		let firstSuccessStory = responseText.split(',')[0]
+			$('#firstSuccessStory').html(firstSuccessStory)
+    		let firstSuccessDescription = responseText.split(',')[1]
+			$('#firstSuccessDescription').html(firstSuccessDescription)
+			
+    	}
+    });
+
+});
+
 $(document).on("submit", "#EditPage", function(event) {
     
 	console.log('Post Sending')
@@ -25,10 +43,6 @@ $(document).on("submit", "#EditPage", function(event) {
 			$('#firstSuccessStory').html(firstSuccessStory)
     		let firstSuccessDescription = responseText.split(',')[1]
 			$('#firstSuccessDescription').html(firstSuccessDescription)
-			let secondSuccessStory = responseText.split(',')[0]
-			$('#secondSuccessStory').html(secondSuccessStory)
-    		let secondSuccessDescription = responseText.split(',')[1]
-			$('#secondSuccessDescription').html(secondSuccessDescription)
     	}
     });
 
@@ -76,6 +90,12 @@ $(document).on("submit", "#EditPage", function(event) {
 		</form>
 	</div>
 	<br>
+	<div class="hidden">
+		<form id="LoadData" method="get" action="/WebsiteBuilder/EditPage">
+			<input class="form-control" name="dataNeeded" value="successStory"/>
+			<br>
+		</form>
+	</div>
 	
 </body>
 </html>

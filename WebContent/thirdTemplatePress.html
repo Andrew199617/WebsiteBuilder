@@ -10,6 +10,24 @@
 </head>
 <script type="text/javascript" >
 
+$(document).ready(function(event) {
+    
+    $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
+		
+    	if(responseText === "error"){
+			
+		}
+    	else {
+    		let firstFAQQuestion = responseText.split(',')[0]
+			$('#firstFAQQuestion').html(firstFAQQuestion)
+    		let firstFAQAnswer = responseText.split(',')[1]
+			$('#firstFAQAnswer').html(firstFAQAnswer)
+			
+    	}
+    });
+
+});
+
 $(document).on("submit", "#EditPage", function(event) {
     
 	console.log('Post Sending')
@@ -25,14 +43,7 @@ $(document).on("submit", "#EditPage", function(event) {
 			$('#firstFAQQuestion').html(firstFAQQuestion)
     		let firstFAQAnswer = responseText.split(',')[1]
 			$('#firstFAQAnswer').html(firstFAQAnswer)
-			let secondFAQQuestion = responseText.split(',')[0]
-			$('#secondFAQQuestion').html(secondFAQQuestion)
-    		let secondFAQAnswer = responseText.split(',')[1]
-			$('#secondFAQAnswer').html(secondFAQAnswer)
-			let thirdFAQQuestion = responseText.split(',')[0]
-			$('#thirdFAQQuestion').html(thirdFAQQuestion)
-    		let thirdFAQAnswer = responseText.split(',')[1]
-			$('#thirdFAQAnswer').html(thirdFAQAnswer)
+			
     	}
     });
 
@@ -81,6 +92,12 @@ $(document).on("submit", "#EditPage", function(event) {
 		</form>
 	</div>
 	<br>
+	<div class="hidden">
+		<form id="LoadData" method="get" action="/WebsiteBuilder/EditPage">
+			<input class="form-control" name="dataNeeded" value="faq"/>
+			<br>
+		</form>
+	</div>
 	
 
 </body>

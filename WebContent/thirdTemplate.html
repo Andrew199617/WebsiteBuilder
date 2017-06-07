@@ -10,6 +10,24 @@
 </head>
 <script type="text/javascript" >
 
+$(document).ready(function(event) {
+    
+    $.get($('#LoadData').attr("action"),  $('#LoadData').serialize(), function(responseText) {
+		
+    	if(responseText === "error"){
+			
+		}
+    	else {
+    		let thirdTemplateTitle = responseText.split(',')[0]
+			$('#thirdTemplateTitle').html(thirdTemplateTitle)
+    		let thirdTemplateDescription = responseText.split(',')[1]
+			$('#thirdTemplateDescription').html(thirdTemplateDescription)
+			
+    	}
+    });
+
+});
+
 $(document).on("submit", "#EditPage", function(event) {
     
 	console.log('Post Sending')
@@ -67,6 +85,12 @@ $(document).on("submit", "#EditPage", function(event) {
 		</form>
 	</div>
 	<br>
+	<div class="hidden">
+		<form id="LoadData" method="get" action="/WebsiteBuilder/EditPage">
+			<input class="form-control" name="dataNeeded" value="thirdTitle/Description"/>
+			<br>
+		</form>
+	</div>
 
 </body>
 </html>
