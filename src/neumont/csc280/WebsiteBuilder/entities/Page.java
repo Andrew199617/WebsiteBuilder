@@ -26,68 +26,32 @@ public class Page {
 	@Column(name="history", nullable=true)
 	private String history;
 	
-	@Column(name="firstTemplateTitle", nullable=true)
-	private String firstTemplateTitle;
+	@Column(name="Title", nullable=true)
+	private String title;
 	
-	@Column(name="secondTemplateTitle", nullable=true)
-	private String secondTemplateTitle;
-	
-	@Column(name="firstTemplateDescription", nullable=true)
-	private String firstTemplateDescription;
-	
-	@Column(name="secondTemplateDescription", nullable=true)
-	private String secondTemplateDescription;
+	@Column(name="Description", nullable=true)
+	private String description;
 	
 	@Column(name="address", nullable=true)
 	private String address;
 	
-	@Column(name="firstSuccessStory", nullable=true)
-	private String firstSuccessStory;
+	@Column(name="SuccessStory", nullable=true)
+	private String successStory;
 	
-	@Column(name="firstSuccessDescription", nullable=true)
-	private String firstSuccessDescription;
+	@Column(name="SuccessDescription", nullable=true)
+	private String successDescription;
 	
-	@Column(name="secondSuccessStory", nullable=true)
-	private String secondSuccessStory;
+	@Column(name="JobTitle", nullable=true)
+	private String jobTitle;
 	
-	@Column(name="secondSuccessDescription", nullable=true)
-	private String secondSuccessDescription;
+	@Column(name="JobDescription", nullable=true)
+	private String jobDescription;
 	
-	@Column(name="firstJobTitle", nullable=true)
-	private String firstJobTitle;
+	@Column(name="FAQQuestion", nullable=true)
+	private String FAQQuestion;
 	
-	@Column(name="firstJobDescription", nullable=true)
-	private String firstJobDescription;
-	
-	@Column(name="secondJobTitle", nullable=true)
-	private String secondJobTitle;
-	
-	@Column(name="secondJobDescription", nullable=true)
-	private String secondJobDescription;
-	
-	@Column(name="thirdTemplateTitle", nullable=true)
-	private String thirdTemplateTitle;
-	
-	@Column(name="thirdTemplateDescription", nullable=true)
-	private String thirdTemplateDescription;
-	
-	@Column(name="firstFAQQuestion", nullable=true)
-	private String firstFAQQuestion;
-	
-	@Column(name="firstFAQAnswer", nullable=true)
-	private String firstFAQAnswer;
-	
-	@Column(name="secondFAQQuestion", nullable=true)
-	private String secondFAQQuestion;
-	
-	@Column(name="secondFAQAnswer", nullable=true)
-	private String secondFAQAnswer;
-	
-	@Column(name="thirdFAQQuestion", nullable=true)
-	private String thirdFAQQuestion;
-	
-	@Column(name="thirdFAQAnswer", nullable=true)
-	private String thirdFAQAnswer;
+	@Column(name="FAQAnswer", nullable=true)
+	private String FAQAnswer;
 	
 	@Column(name="profileName", nullable=true)
 	private String profileName;
@@ -124,172 +88,12 @@ public class Page {
 		this.email = email;
 	}
 
-	public String getFirstFAQQuestion() {
-		return firstFAQQuestion;
-	}
-
-	public void setFirstFAQQuestion(String firstFAQQuestion) {
-		this.firstFAQQuestion = firstFAQQuestion;
-	}
-
-	public String getFirstFAQAnswer() {
-		return firstFAQAnswer;
-	}
-
-	public void setFirstFAQAnswer(String firstFAQAnswer) {
-		this.firstFAQAnswer = firstFAQAnswer;
-	}
-
-	public String getSecondFAQQuestion() {
-		return secondFAQQuestion;
-	}
-
-	public void setSecondFAQQuestion(String secondFAQQuestion) {
-		this.secondFAQQuestion = secondFAQQuestion;
-	}
-
-	public String getSecondFAQAnswer() {
-		return secondFAQAnswer;
-	}
-
-	public void setSecondFAQAnswer(String secondFAQAnswer) {
-		this.secondFAQAnswer = secondFAQAnswer;
-	}
-
-	public String getThirdFAQQuestion() {
-		return thirdFAQQuestion;
-	}
-
-	public void setThirdFAQQuestion(String thirdFAQQuestion) {
-		this.thirdFAQQuestion = thirdFAQQuestion;
-	}
-
-	public String getThirdFAQAnswer() {
-		return thirdFAQAnswer;
-	}
-
-	public void setThirdFAQAnswer(String thirdFAQAnswer) {
-		this.thirdFAQAnswer = thirdFAQAnswer;
-	}
-
-	public String getThirdTemplateTitle() {
-		return thirdTemplateTitle;
-	}
-
-	public void setThirdTemplateTitle(String thirdTemplateTitle) {
-		this.thirdTemplateTitle = thirdTemplateTitle;
-	}
-
-	public String getThirdTemplateDescription() {
-		return thirdTemplateDescription;
-	}
-
-	public void setThirdTemplateDescription(String thirdTemplateDescription) {
-		this.thirdTemplateDescription = thirdTemplateDescription;
-	}
-
-	public String getFirstJobTitle() {
-		return firstJobTitle;
-	}
-
-	public void setFirstJobTitle(String firstJobTitle) {
-		this.firstJobTitle = firstJobTitle;
-	}
-
-	public String getFirstJobDescription() {
-		return firstJobDescription;
-	}
-
-	public void setFirstJobDescription(String firstJobDescription) {
-		this.firstJobDescription = firstJobDescription;
-	}
-
-	public String getSecondJobTitle() {
-		return secondJobTitle;
-	}
-
-	public void setSecondJobTitle(String secondJobTitle) {
-		this.secondJobTitle = secondJobTitle;
-	}
-
-	public String getSecondJobDescription() {
-		return secondJobDescription;
-	}
-
-	public void setSecondJobDescription(String secondJobDescription) {
-		this.secondJobDescription = secondJobDescription;
-	}
-
-	public String getFirstSuccessStory() {
-		return firstSuccessStory;
-	}
-
-	public void setFirstSuccessStory(String firstSuccessStory) {
-		this.firstSuccessStory = firstSuccessStory;
-	}
-
-	public String getFirstSuccessDescription() {
-		return firstSuccessDescription;
-	}
-
-	public void setFirstSuccessDescription(String firstSuccessDescription) {
-		this.firstSuccessDescription = firstSuccessDescription;
-	}
-
-	public String getSecondSuccessStory() {
-		return secondSuccessStory;
-	}
-
-	public void setSecondSuccessStory(String secondSuccessStory) {
-		this.secondSuccessStory = secondSuccessStory;
-	}
-
-	public String getSecondSuccessDescription() {
-		return secondSuccessDescription;
-	}
-
-	public void setSecondSuccessDescription(String secondSuccessDescription) {
-		this.secondSuccessDescription = secondSuccessDescription;
-	}
-
 	public String getAddress() {
 		return address;
 	}
 
-	public String getSecondTemplateDescription() {
-		return secondTemplateDescription;
-	}
-
-	public void setSecondTemplateDescription(String secondTemplateDescription) {
-		this.secondTemplateDescription = secondTemplateDescription;
-	}
-
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	
-	public String getSecondTemplateTitle() {
-		return secondTemplateTitle;
-	}
-
-	public void setSecondTemplateTitle(String secondTemplateTitle) {
-		this.secondTemplateTitle = secondTemplateTitle;
-	}
-
-	public String getFirstTemplateDescription() {
-		return firstTemplateDescription;
-	}
-
-	public void setFirstTemplateDescription(String firstTemplateDescription) {
-		this.firstTemplateDescription = firstTemplateDescription;
-	}
-
-	public String getFirstTemplateTitle() {
-		return firstTemplateTitle;
-	}
-
-	public void setFirstTemplateTitle(String firstTemplateTitle) {
-		this.firstTemplateTitle = firstTemplateTitle;
 	}
 
 	@ManyToOne
@@ -334,6 +138,70 @@ public class Page {
 
 	public void setHistory(String history) {
 		this.history = history;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getSuccessStory() {
+		return successStory;
+	}
+
+	public void setSuccessStory(String successStory) {
+		this.successStory = successStory;
+	}
+
+	public String getSuccessDescription() {
+		return successDescription;
+	}
+
+	public void setSuccessDescription(String successDescription) {
+		this.successDescription = successDescription;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
+	public String getJobDescription() {
+		return jobDescription;
+	}
+
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+
+	public String getFAQQuestion() {
+		return FAQQuestion;
+	}
+
+	public void setFAQQuestion(String fAQQuestion) {
+		FAQQuestion = fAQQuestion;
+	}
+
+	public String getFAQAnswer() {
+		return FAQAnswer;
+	}
+
+	public void setFAQAnswer(String fAQAnswer) {
+		FAQAnswer = fAQAnswer;
 	}
 	
 }

@@ -22,6 +22,7 @@ public class EditPage extends HttpServlet {
 	String firstTemplateTitle;
 	String firstTemplateDescription;
 	Page page = null;
+	boolean pageCreated = false;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -59,15 +60,20 @@ public class EditPage extends HttpServlet {
 		Transaction transaction = dbSession.beginTransaction();
 		if(page == null){
 			page = new Page();
-		}
-		try {
-			page.setName("test");
-			page.setHistory(history);
-			page.setMissionStatement(missionStatement);
 			page.setOwner(user);
 			user.getPages().add(page);
+		}
+		try {
+			page.setHistory(history);
+			page.setMissionStatement(missionStatement);
 			
-			dbSession.save(page);
+			if(pageCreated){
+				dbSession.update(page);
+			} else {
+				dbSession.save(page);
+				pageCreated = true;
+			}
+			
 			
 			transaction.commit();
 		}
@@ -90,14 +96,19 @@ public class EditPage extends HttpServlet {
 		Transaction transaction = dbSession.beginTransaction();
 		if(page == null){
 			page = new Page();
-		}
-		try {
-			page.setFirstTemplateTitle(firstTemplateTitle);
-			page.setFirstTemplateDescription(firstTemplateDescription);
 			page.setOwner(user);
 			user.getPages().add(page);
+		}
+		try {
+			page.setTitle(firstTemplateTitle);
+			page.setDescription(firstTemplateDescription);
 			
-			dbSession.save(page);
+			if(pageCreated){
+				dbSession.update(page);
+			} else {
+				dbSession.save(page);
+				pageCreated = true;
+			}
 			
 			transaction.commit();
 		}
